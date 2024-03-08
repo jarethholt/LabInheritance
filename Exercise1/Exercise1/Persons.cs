@@ -37,3 +37,21 @@ public class Person
     public override string ToString() => $"Name: {Name}, Age: {Age}";
     
 }
+
+
+public class Child : Person
+{
+    protected override int Age
+    {
+        get => base.Age;
+        set
+        {
+            if (value > 15)
+                throw new ArgumentOutOfRangeException(
+                    "Child's age must be less than or equal to 15!");
+            base.Age = value;
+        }
+    }
+
+    public Child(string name, int age) : base(name, age) {}
+}
