@@ -2,14 +2,15 @@ namespace Exercise1;
 
 public class Person
 {
-    private string _name;
+    private string _name = default!;
     protected virtual string Name
     {
         get => _name;
         set
         {
             if (value.Length < 3)
-                throw new ArgumentException(
+                throw new ArgumentOutOfRangeException(
+                    "Name",
                     "Name's length should not be less than 3 symbols!");
             _name = value;
         }
@@ -21,8 +22,9 @@ public class Person
         get => _age;
         set
         {
-            if (_age < 0)
+            if (value < 0)
                 throw new ArgumentOutOfRangeException(
+                    "Age",
                     "Age must be positive!");
             _age = value;
         }
@@ -39,7 +41,7 @@ public class Person
 }
 
 
-public class Child : Person
+public class Child(string name, int age) : Person(name, age)
 {
     protected override int Age
     {
@@ -48,10 +50,9 @@ public class Child : Person
         {
             if (value > 15)
                 throw new ArgumentOutOfRangeException(
+                    "Age",
                     "Child's age must be less than or equal to 15!");
             base.Age = value;
         }
     }
-
-    public Child(string name, int age) : base(name, age) {}
 }
