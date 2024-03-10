@@ -45,3 +45,30 @@ public class Human
     }
     
 }
+
+
+public class Student : Human
+{
+    private string _facultNumber = default!;
+    public string FacultyNumber
+    {
+        get => _facultNumber;
+        set
+        {
+            if (!value.All(char.IsLetterOrDigit))
+                throw new ArgumentException(
+                    paramName: "FacultyNumber",
+                    message: "Invalid faculty number!");
+            if (value.Length < 5 || value.Length > 10)
+                throw new ArgumentException(
+                    paramName: "FacultyNumber",
+                    message: "Invalid faculty number!");
+            _facultNumber = value;
+        }
+    }
+
+    public Student(string firstName, string lastName, string facultyNumber)
+        : base(firstName, lastName)
+        => FacultyNumber = facultyNumber;
+    
+}
