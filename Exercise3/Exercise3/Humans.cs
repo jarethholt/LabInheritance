@@ -72,3 +72,35 @@ public class Student : Human
         => FacultyNumber = facultyNumber;
     
 }
+
+
+public class Worker : Human
+{
+    private decimal _weekSalary;
+    public decimal WeekSalary
+    {
+        get => _weekSalary;
+        set
+        {
+            _weekSalary = value;
+        }
+    }
+
+    private int _workHoursPerDay;
+    public int WorkHoursPerDay
+    {
+        get => _workHoursPerDay;
+        set
+        {
+            _workHoursPerDay = value;
+        }
+    }
+
+    public Worker(string firstName, string lastName, decimal weekSalary, int workHoursPerDay)
+        : base(firstName, lastName)
+    {
+        WeekSalary = weekSalary;
+        WorkHoursPerDay = workHoursPerDay;
+    }
+
+}
