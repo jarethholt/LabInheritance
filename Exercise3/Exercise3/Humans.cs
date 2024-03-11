@@ -138,9 +138,9 @@ public class Worker : Human
     {
         StringBuilder sb = new();
         sb.Append(base.ToString());
-        sb.AppendLine($"Week Salary: {WeekSalary:C2}");
-        sb.AppendLine($"Hours per day: {(decimal)HoursPerDay:C2}");
-        sb.AppendLine($"Salary per hour: {HourSalary:C2}");
+        sb.AppendLine($"Week Salary: {WeekSalary:N2}");
+        sb.AppendLine($"Hours per day: {(decimal)HoursPerDay:N2}");
+        sb.AppendLine($"Salary per hour: {HourSalary:N2}");
         return sb.ToString();
     }
 
