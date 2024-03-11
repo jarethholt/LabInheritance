@@ -61,15 +61,19 @@ public readonly struct Song
     public Song(string songData)
     {
         string[] data = songData.Split(';');
-        if (data.Length != 4)
+        if (data.Length != 3)
             throw new ArgumentException(
-                message: "Must provide 4 pieces of data separated by ';'");
-        if (!int.TryParse(data[2], out int songMinutes))
+                message: "Must provide 3 pieces of data separated by ';'");
+        string[] subdata = data[2].Split(':');
+        if (subdata.Length != 2)
             throw new ArgumentException(
-                message: $"Could not parse '{data[2]}' as an integer");
-        if (!int.TryParse(data[3], out int songSeconds))
+                message: "Must provide the song length in '<m>:<s>' format");
+        if (!int.TryParse(subdata[0], out int songMinutes))
             throw new ArgumentException(
-                message: $"Could not parse '{data[3]}' as an integer");
+                message: $"Could not parse '{subdata[0]}' as an integer");
+        if (!int.TryParse(subdata[1], out int songSeconds))
+            throw new ArgumentException(
+                message: $"Could not parse '{subdata[1]}' as an integer");
         ArtistName = data[0];
         SongName = data[1];
         SongMinutes = songMinutes;
