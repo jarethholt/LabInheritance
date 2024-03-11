@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Exercise3;
 
 public class Human
@@ -43,6 +45,14 @@ public class Human
         FirstName = firstName;
         LastName = lastName;
     }
+
+    public override string ToString()
+    {
+        StringBuilder sb = new();
+        sb.AppendLine($"First Name: {FirstName}");
+        sb.AppendLine($"Last Name: {LastName}");
+        return sb.ToString();
+    }
     
 }
 
@@ -70,6 +80,14 @@ public class Student : Human
     public Student(string firstName, string lastName, string facultyNumber)
         : base(firstName, lastName)
         => FacultyNumber = facultyNumber;
+    
+    public override string ToString()
+    {
+        StringBuilder sb = new();
+        sb.Append(base.ToString());
+        sb.AppendLine($"Faculty number: {FacultyNumber}");
+        return sb.ToString();
+    }
     
 }
 
@@ -114,6 +132,16 @@ public class Worker : Human
     public decimal HourSalary
     {
         get => WeekSalary / (WorkHoursPerDay * 5);
+    }
+
+    public override string ToString()
+    {
+        StringBuilder sb = new();
+        sb.Append(base.ToString());
+        sb.AppendLine($"Week Salary: {WeekSalary:C2}");
+        sb.AppendLine($"Hours per day: {(decimal)WorkHoursPerDay:C2}");
+        sb.AppendLine($"Salary per hour: {HourSalary:C2}");
+        return sb.ToString();
     }
 
 }
