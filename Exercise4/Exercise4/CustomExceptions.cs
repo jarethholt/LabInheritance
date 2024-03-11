@@ -15,7 +15,17 @@ public class InvalidSongNameException()
         message: "Song name should be between 3 and 20 symbols.",
         paramName: "SongName") {}
 
-public class InvalidSongLengthException(string? paramName = null)
+public class InvalidSongLengthException(string? message = null, string? paramName = null)
     : InvalidSongException(
-        message: "Invalid song length.",
+        message: message ?? "Invalid song length.",
         paramName: paramName ?? "SongLength") {}
+
+public class InvalidSongMinutesException()
+    : InvalidSongLengthException(
+        message: "Song minutes should be between 0 and 14.",
+        paramName: "SongMinutes") {}
+
+public class InvalidSongSecondsException()
+    : InvalidSongLengthException(
+        message: "Song seconds should be between 0 and 59.",
+        paramName: "SongSeconds") {}
