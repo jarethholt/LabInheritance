@@ -1,33 +1,21 @@
 namespace Exercise4;
 
-public class InvalidSongException : ArgumentException
-{
-    private static readonly string _message = "Invalid song.";
+public class InvalidSongException(string? message = null, string? paramName = null)
+    : ArgumentException(
+        message: message ?? "Invalid song.",
+        paramName: paramName) {}
 
-    public InvalidSongException()
-        : base(message: _message) {}
-    
-    public InvalidSongException(string? message)
-        : base(message: message) {}
-}
+public class InvalidArtistNameException()
+    : InvalidSongException(
+        message: "Artist name should be between 3 and 20 symbols.",
+        paramName: "ArtistName") {}
 
-public class InvalidArtistNameException: InvalidSongException
-{
-    private static readonly string _message = "Artist name should be between 3 and 20 symbols";
-    
-    public InvalidArtistNameException() : base(message: _message) {}
-}
+public class InvalidSongNameException()
+    : InvalidSongException(
+        message: "Song name should be between 3 and 20 symbols.",
+        paramName: "SongName") {}
 
-public class InvalidSongNameException: InvalidSongException
-{
-    private static readonly string _message = "Song name should be between 3 and 20 symbols";
-    
-    public InvalidSongNameException() : base(message: _message) {}
-}
-
-public class InvalidSongLengthException: InvalidSongException
-{
-    private static readonly string _message = "Invalid song length";
-
-    public InvalidSongLengthException() : base(message: _message) {}
-}
+public class InvalidSongLengthException(string? paramName = null)
+    : InvalidSongException(
+        message: "Invalid song length.",
+        paramName: paramName ?? "SongLength") {}
