@@ -82,6 +82,10 @@ public class Worker : Human
         get => _weekSalary;
         set
         {
+            if (value <= 10m)
+                throw new ArgumentOutOfRangeException(
+                    paramName: "WeekSalary",
+                    message: "Expected value mismatch!");
             _weekSalary = value;
         }
     }
@@ -92,6 +96,10 @@ public class Worker : Human
         get => _workHoursPerDay;
         set
         {
+            if (value < 1 || value > 12)
+                throw new ArgumentOutOfRangeException(
+                    paramName: "WorkHoursPerDay",
+                    message: "Expected value mismatch!");
             _workHoursPerDay = value;
         }
     }
@@ -101,6 +109,11 @@ public class Worker : Human
     {
         WeekSalary = weekSalary;
         WorkHoursPerDay = workHoursPerDay;
+    }
+
+    public decimal HourSalary
+    {
+        get => WeekSalary / (WorkHoursPerDay * 5);
     }
 
 }
