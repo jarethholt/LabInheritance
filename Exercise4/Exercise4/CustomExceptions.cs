@@ -17,3 +17,10 @@ public class InvalidArtistNameException: InvalidSongException
     
     public InvalidArtistNameException() : base(message: _message) {}
 }
+
+public class InvalidSongNameException: InvalidSongException
+{
+    private static readonly string _message = "Song name should be between 3 and 20 symbols";
+    
+    public InvalidSongNameException() : base(message: _message) {}
+}
