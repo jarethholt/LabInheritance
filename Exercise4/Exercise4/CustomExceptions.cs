@@ -24,3 +24,10 @@ public class InvalidSongNameException: InvalidSongException
     
     public InvalidSongNameException() : base(message: _message) {}
 }
+
+public class InvalidSongLengthException: InvalidSongException
+{
+    private static readonly string _message = "Invalid song length";
+
+    public InvalidSongLengthException() : base(message: _message) {}
+}
