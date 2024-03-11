@@ -99,13 +99,44 @@ public class Playlist
     public void Add(string songData)
         => _songs.Add(new Song(songData));
     
-    public string TotalLength()
+    public int Length => _songs.Count;
+    
+    public string TotalTime
     {
-        int seconds = _songs.Select(song => song.TotalSeconds).Sum();
-        int hours = seconds / 3600;
-        seconds -= 3600 * hours;
-        int minutes = seconds / 60;
-        seconds -= 60 * minutes;
-        return $"{hours}h{minutes,2}m{seconds,2}s";
+        get
+        {
+            int seconds = _songs.Select(song => song.TotalSeconds).Sum();
+            int hours = seconds / 3600;
+            seconds -= 3600 * hours;
+            int minutes = seconds / 60;
+            seconds -= 60 * minutes;
+            return $"{hours}h{minutes,2}m{seconds,2}s";
+        }
+    }
+}
+
+
+public class Program
+{
+    static void Main()
+    {
+        Playlist playlist = new();
+        int numSongs = int.Parse(Console.ReadLine()!);
+        for (int i = 0; i < numSongs; i++)
+        {
+            try
+            {
+                string songData = Console.ReadLine()!;
+                playlist.Add(songData);
+                Console.WriteLine("Song added.");
+            }
+            catch (InvalidSongException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        Console.WriteLine($"Songs added: {playlist.Length}");
+        Console.WriteLine($"Playlist length: {playlist.TotalTime}");
     }
 }
