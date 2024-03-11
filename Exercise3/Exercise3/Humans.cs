@@ -108,17 +108,17 @@ public class Worker : Human
         }
     }
 
-    private int _workHoursPerDay;
-    public int WorkHoursPerDay
+    private int _hoursPerDay;
+    public int HoursPerDay
     {
-        get => _workHoursPerDay;
+        get => _hoursPerDay;
         set
         {
             if (value < 1 || value > 12)
                 throw new ArgumentOutOfRangeException(
-                    paramName: "WorkHoursPerDay",
+                    paramName: "HoursPerDay",
                     message: "Expected value mismatch!");
-            _workHoursPerDay = value;
+            _hoursPerDay = value;
         }
     }
 
@@ -126,12 +126,12 @@ public class Worker : Human
         : base(firstName, lastName)
     {
         WeekSalary = weekSalary;
-        WorkHoursPerDay = workHoursPerDay;
+        HoursPerDay = workHoursPerDay;
     }
 
     public decimal HourSalary
     {
-        get => WeekSalary / (WorkHoursPerDay * 5);
+        get => WeekSalary / (HoursPerDay * 5);
     }
 
     public override string ToString()
@@ -139,7 +139,7 @@ public class Worker : Human
         StringBuilder sb = new();
         sb.Append(base.ToString());
         sb.AppendLine($"Week Salary: {WeekSalary:C2}");
-        sb.AppendLine($"Hours per day: {(decimal)WorkHoursPerDay:C2}");
+        sb.AppendLine($"Hours per day: {(decimal)HoursPerDay:C2}");
         sb.AppendLine($"Salary per hour: {HourSalary:C2}");
         return sb.ToString();
     }
