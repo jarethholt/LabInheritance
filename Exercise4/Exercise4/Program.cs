@@ -49,11 +49,6 @@ public readonly struct Song
             _songSeconds = value;
         }
     }
-
-    public readonly string SongLength => $"{SongMinutes}:{SongSeconds}";
-
-    public override string ToString()
-        => $"{ArtistName};{SongName};{SongLength}";
     
     public Song(string artistName, string songName, int songMinutes, int songSeconds)
     {
@@ -63,9 +58,9 @@ public readonly struct Song
         SongSeconds = songSeconds;
     }
 
-    public Song(string dataLine)
+    public Song(string songData)
     {
-        string[] data = dataLine.Split(';');
+        string[] data = songData.Split(';');
         if (data.Length != 4)
             throw new ArgumentException(
                 message: "Must provide 4 pieces of data separated by ';'");
@@ -80,5 +75,33 @@ public readonly struct Song
         SongMinutes = songMinutes;
         SongSeconds = songSeconds;
     }
+
+    public readonly string SongLength => $"{SongMinutes}:{SongSeconds}";
+
+    public override string ToString()
+        => $"{ArtistName};{SongName};{SongLength}";
     
+    public int TotalSeconds => SongMinutes*60 + SongSeconds;
+    
+}
+
+public class Playlist
+{
+    private readonly List<Song> _songs = [];
+
+    public void Add(Song song) => _songs.Add(song);
+    public void Add(string artistName, string songName, int songMinutes, int songSeconds)
+        => _songs.Add(new Song(artistName, songName, songMinutes, songSeconds));
+    public void Add(string songData)
+        => _songs.Add(new Song(songData));
+    
+    public string TotalLength()
+    {
+        int seconds = _songs.Select(song => song.TotalSeconds).Sum();
+        int hours = seconds / 3600;
+        seconds -= 3600 * hours;
+        int minutes = seconds / 60;
+        seconds -= 60 * minutes;
+        return $"{hours}h{minutes,2}m{seconds,2}s";
+    }
 }
