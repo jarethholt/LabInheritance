@@ -2,11 +2,18 @@ namespace Exercise4;
 
 public class InvalidSongException : ArgumentException
 {
-    private static string _message = "Invalid song.";
+    private static readonly string _message = "Invalid song.";
 
     public InvalidSongException()
         : base(message: _message) {}
+    
+    public InvalidSongException(string? message)
+        : base(message: message) {}
+}
 
-    public InvalidSongException(string? paramName)
-        : base(message: _message, paramName: paramName) {}
+public class InvalidArtistNameException: InvalidSongException
+{
+    private static readonly string _message = "Artist name should be between 3 and 20 symbols";
+    
+    public InvalidArtistNameException() : base(message: _message) {}
 }
