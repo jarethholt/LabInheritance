@@ -110,7 +110,7 @@ public class Playlist
             seconds -= 3600 * hours;
             int minutes = seconds / 60;
             seconds -= 60 * minutes;
-            return $"{hours}h{minutes,2}m{seconds,2}s";
+            return $"{hours}h {minutes}m {seconds}s";
         }
     }
 }
